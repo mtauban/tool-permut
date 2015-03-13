@@ -1,0 +1,32 @@
+#!/bin/bash
+# Mathieu Tauban
+# 2013
+# Makes permutations of files
+#
+#
+
+if [ "$#" -eq 0 ]; then
+    echo "This script makes permutation of all the lines contained in all "
+    echo "the files provided in the command argument."
+    exit 1
+fi
+
+
+filelist=( "$@" )
+IN=('') ;
+
+for fff in "${filelist[@]}"; do
+    OUT=() ;                     # Reset OUT
+    for nl in $( cat $fff ) ; do # For each line of the file, we concatenate it with the IN Array and put it in a new ARRAY : OUT
+        for ol in "${IN[@]}"; do
+            OUT+=("${nl}${ol}")  # We add the value to OUT. NEEDS ver bash >= 3
+        done
+    done
+    IN=("${OUT[@]}") # Copy OUT into IN for the next step
+done
+
+# Output
+for ol in "${IN[@]}"; do
+   echo "$ol" ;
+done
+
