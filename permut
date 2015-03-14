@@ -1,9 +1,11 @@
 #!/bin/bash
 # Mathieu Tauban
 # 2013
-# Makes permutations of files
-#
-#
+# Read each lines of the files given as parameters and generates a permutation 
+# for each. if file A contains A1,A2,A3 and file B contains B1,B2, then the 
+# output will be :  A1B1,A1B2,A2B1,A2B2,A3B1,A3B2. 
+# @TODO : Insert something to use a user defined value as a separator instead 
+#         of the regular \n
 
 if [ "$#" -eq 0 ]; then
     echo "This script makes permutation of all the lines contained in all "
