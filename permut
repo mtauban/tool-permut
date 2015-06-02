@@ -1,11 +1,9 @@
 #!/bin/bash
 # Mathieu Tauban
 # 2013
-# Read each lines of the files given as parameters and generates a permutation 
-# for each. if file A contains A1,A2,A3 and file B contains B1,B2, then the 
-# output will be :  A1B1,A1B2,A2B1,A2B2,A3B1,A3B2. 
-# @TODO : Insert something to use a user defined value as a separator instead 
-#         of the regular \n
+# Makes permutations of files
+#
+#
 
 if [ "$#" -eq 0 ]; then
     echo "This script makes permutation of all the lines contained in all "
@@ -19,11 +17,11 @@ IN=('') ;
 
 for fff in "${filelist[@]}"; do
     OUT=() ;                     # Reset OUT
-    for nl in $( cat $fff ) ; do # For each line of the file, we concatenate it with the IN Array and put it in a new ARRAY : OUT
+    while read nl; do  #  For each line of the file, we concatenate it with the IN Array and put it in a new ARRAY : OUT
         for ol in "${IN[@]}"; do
             OUT+=("${nl}${ol}")  # We add the value to OUT. NEEDS ver bash >= 3
         done
-    done
+    done < $fff
     IN=("${OUT[@]}") # Copy OUT into IN for the next step
 done
 
